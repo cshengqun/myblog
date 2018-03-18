@@ -1,0 +1,22 @@
+{{ template "header.html" }}
+	<form class="form-horizontal" role="form" action="/admin/blog/create" method="post">
+		<div class="form-group">
+	    	<label class="col-sm-2 control-label">name</label>
+			<div class="col-sm-6">
+				<textarea class="form-control" rows="1" name="name"></textarea>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">content</label>
+			<div class="col-sm-6">
+				<textarea class="form-control" rows="40" name="content"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">create</button>
+			</div>
+		</div>
+	</form>
+{{ template "footer.html" }}

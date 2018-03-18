@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"gopkg.in/russross/blackfriday.v2"
 	"html/template"
+	. "github.com/cshengqun/myblog/env"
 )
 
 func Index(c *gin.Context) {
@@ -19,6 +20,22 @@ func Index(c *gin.Context) {
 		})
 	} else {
 		c.JSON(http.StatusOK, gin.H{
+			"retCode": -1,
+			"retMsg": err.Error(),
+		})
+	}
+}
+
+func Admin(c *gin.Context) {
+	var page Page
+	page.Size = 2
+	page.Idx = 0
+	if err := page.Get(); err == nil {
+		c.HTML(http.StatusOK, "admin.html", gin.H{
+				"page":page,
+		})
+	} else {
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"retCode": -1,
 			"retMsg": err.Error(),
 		})
@@ -42,7 +59,7 @@ func ReadPage(c *gin.Context) {
 			})
 		}
 	} else {
-		c.JSON(http.StatusOK, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"retCode": -1,
 			"retMsg": err.Error(),
 		})
@@ -50,7 +67,7 @@ func ReadPage(c *gin.Context) {
 }
 
 func GetCreateBlog(c *gin.Context) {
-	c.HTML(http.StatusOK, "pageCreate.html", gin.H{
+	c.HTML(http.StatusOK, "createBlog.html", gin.H{
 
 	})
 }
@@ -78,9 +95,19 @@ func PostCreateBlog(c *gin.Context) {
 	}
 }
 
-func UpdateBlog(c *gin.Context) {
+func PostUpdateBlog(c *gin.Context) {
 	var blog Blog
+	var err error
+	blog.Id, err = strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"retCode": -1,
+			"retMsg": err.Error(),
+		})	
+		return
+	}
 	if err := c.ShouldBind(&blog); err == nil {
+		Env.Logger.Info("id:%d name:%s content:%s", blog.Id, blog.Name, blog.Content)	
 		if err = blog.Update(); err == nil {
 			c.JSON(http.StatusOK, gin.H{
 				"retCode": 0,
@@ -100,7 +127,7 @@ func UpdateBlog(c *gin.Context) {
 	}
 }
 
-func ReadBlog(c *gin.Context) {
+func GetReadBlog(c *gin.Context) {
 	var blog Blog	
 	var err error
 	blog.Id, err = strconv.Atoi(c.Param("id"))
@@ -110,7 +137,7 @@ func ReadBlog(c *gin.Context) {
 			"retMsg": err.Error(),
 		})
 	}
-	if err := blog.Read(); err == nil {
+	if rows, err := blog.Read(); err == nil && rows == 1 {
 		content := template.HTML(blackfriday.Run([]byte(blog.Content)))
 		c.HTML(http.StatusOK, "blog.html", gin.H{
 			"blog": blog,
@@ -118,6 +145,30 @@ func ReadBlog(c *gin.Context) {
 		})
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{
+			"retCode": -1,
+			"retMsg": err.Error(),
+		})
+	}
+}
+
+func GetUpdateBlog(c *gin.Context) {
+	var blog Blog
+	var err error
+	blog.Id, err = strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"retCode": -1,
+			"retMsg": err.Error(),
+		})
+	}
+	if cnt, err := blog.Read(); err == nil && cnt == 1 {
+	//	content := template.HTML(blackfriday.Run([]byte(blog.Content)))
+		c.HTML(http.StatusOK, "updateBlog.html", gin.H{
+			"blog": blog,
+			"content": blog.Content,
+		})
+	} else {
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"retCode": -1,
 			"retMsg": err.Error(),
 		})

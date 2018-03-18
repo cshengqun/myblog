@@ -1,0 +1,21 @@
+{
+	"ip": "10.135.73.26",
+	"port": "8080",
+	"dbUser": "root",
+	"dbPasswd": "root",
+	"dbName": "myblog",
+	"dbIp": "127.0.0.1",
+	"dbPort": "3306",
+	"account": "sampson",
+	"password": "justdoit",
+	"LogConf" :
+	{
+		"FileName" : "../log/myblog.log",
+		"FileCnt" : 20,
+		"FileSize" : 100000000,
+		"Level" : 3,
+		"ChanSize" : 1000,
+		"ThreadCnt" : 1,
+		"WriterLv" : 3
+	}
+}

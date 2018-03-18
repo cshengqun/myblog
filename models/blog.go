@@ -28,15 +28,15 @@ func (blog *Blog) Update() (err error) {
 	return
 }
 
-func (blog *Blog) Read() (err error) {
+func (blog *Blog) Read() (rows int, err error) {
 	res, err := db.SqlDB.Query("select name, content, createdAt from blogs where id=?", blog.Id)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 	defer res.Close()
-
 	for res.Next() {
+		rows++
 		err = res.Scan(&blog.Name, &blog.Content, &blog.CreatedAt)
 		if err != nil {
 			fmt.Println(err.Error())

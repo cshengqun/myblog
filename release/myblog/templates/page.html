@@ -1,0 +1,10 @@
+{{ template "header.html" }}
+	{{ range .page.Blogs }}
+		<div class="row" align="center">
+			<a class="col-sm-4" href="/blog/read/{{ .Id }}">
+				<h4>{{ .Name }}</h4>
+			</a>
+			<h4 class="col-sm-4">{{ .CreatedAt }}</h4>
+		</div>
+	{{ end }}
+{{ template "footer.html" }}

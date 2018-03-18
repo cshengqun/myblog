@@ -1,5 +1,4 @@
 package main
-//test commit
 import (
 	"github.com/gin-gonic/gin"
 	. "github.com/cshengqun/myblog/apis"
@@ -13,16 +12,18 @@ func initRouter() *gin.Engine {
 	router.LoadHTMLGlob("../templates/*")
 	router.Static("/static/", "../static/")
 	router.GET("/", Index)
-	router.GET("/blog/read/:id", ReadBlog)
+	router.GET("/blog/read/:id", GetReadBlog)
 	router.GET("/page/read/:idx", ReadPage)
-	router.POST("/blog/update", UpdateBlog)
-	router.POST("/blog/delete/:id", DeleteBlog)
 
 	authorized := router.Group("/admin", gin.BasicAuth(gin.Accounts{
 		Env.Conf.Account: Env.Conf.Password,
 	}))
+	authorized.GET("/", Admin)
 	authorized.GET("/blog/create", GetCreateBlog)
 	authorized.POST("/blog/create", PostCreateBlog)
+	authorized.GET("/blog/update/:id", GetUpdateBlog)
+	authorized.POST("/blog/update/:id", PostUpdateBlog)
+	authorized.GET("/blog/delete/:id", DeleteBlog)
 
 	return router
 }
