@@ -12,8 +12,10 @@ import (
 
 func Index(c *gin.Context) {
 	var page Page
-	page.Size = 2
+	page.Size = Env.Conf.PageSize
 	page.Idx = 0
+	page.PreIdx = page.Idx - 1
+	page.NextIdx = page.Idx + 1
 	if err := page.Get(); err == nil {
 		c.HTML(http.StatusOK, "page.html", gin.H{
 			"page": page,
@@ -28,8 +30,10 @@ func Index(c *gin.Context) {
 
 func Admin(c *gin.Context) {
 	var page Page
-	page.Size = 2
+	page.Size = Env.Conf.PageSize
 	page.Idx = 0
+	page.PreIdx = page.Idx - 1
+	page.NextIdx = page.Idx + 1
 	if err := page.Get(); err == nil {
 		c.HTML(http.StatusOK, "admin.html", gin.H{
 				"page":page,
@@ -44,12 +48,13 @@ func Admin(c *gin.Context) {
 
 func ReadPage(c *gin.Context) {
 	var page Page
-	page.Size = 2
+	page.Size = Env.Conf.PageSize
 	page.Idx, _ = strconv.Atoi(c.Param("idx"))
-	page.Idx--
 	if page.Idx < 0 {
 		page.Idx = 0
 	}
+	page.PreIdx = page.Idx - 1
+	page.NextIdx = page.Idx + 1
 	if err := page.Get(); err == nil {
 		if len(page.Blogs) == 0 {
 			c.Redirect(http.StatusMovedPermanently, "/")

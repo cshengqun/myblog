@@ -17,6 +17,7 @@ type Config struct {
 	Account string `json:account`
 	Password string `json:password`
 	LogConf  LogConfig `json:LogConf`
+	PageSize int `json:PageSize`
 }
 
 type LogConfig struct {

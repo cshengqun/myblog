@@ -8,6 +8,8 @@ import (
 type Page struct {
 	Size int
 	Idx int
+	PreIdx int
+	NextIdx int
 	Blogs []Blog
 }
 

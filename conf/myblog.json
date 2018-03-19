@@ -17,5 +17,6 @@
 		"ChanSize" : 1000,
 		"ThreadCnt" : 1,
 		"WriterLv" : 3
-	}
+	},
+	"PageSize" : 10
 }

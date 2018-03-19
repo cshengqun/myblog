@@ -1,10 +1,19 @@
 {{ template "header.html" }}
 	{{ range .page.Blogs }}
 		<div class="row" align="left">
-			<a class="col-sm-7" href="/blog/read/{{ .Id }}">
+			<a class="col-sm-9" href="/blog/read/{{ .Id }}">
 				<h4>{{ .Name }}</h4>
 			</a>
 			<h4 class="col-sm-3">{{ .CreatedAt }}</h4>
 		</div>
 	{{ end }}
+	<br/>
+	<div class="row" align="center">
+		<div class="col-sm-6">
+			<button class="btn btn-default"><a href="/page/read/{{ .page.PreIdx }}"><span class="glyphicon glyphicon-arrow-left"></span> Pre</a></button>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-default text-dark"><a href="/page/read/{{ .page.NextIdx }}">Next <span class="glyphicon glyphicon-arrow-right"></span></a></button>
+		</div>
+	</div>
 {{ template "footer.html" }}

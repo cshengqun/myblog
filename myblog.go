@@ -6,8 +6,8 @@ import (
 )
 
 func initRouter() *gin.Engine {
-	gin.DisableConsoleColor()
-	gin.DefaultWriter = Env.Logger
+//	gin.DisableConsoleColor()
+//	gin.DefaultWriter = Env.Logger
 	router := gin.Default()
 	router.LoadHTMLGlob("../templates/*")
 	router.Static("/static/", "../static/")

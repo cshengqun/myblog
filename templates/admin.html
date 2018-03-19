@@ -1,4 +1,7 @@
 {{ template "header.html" }}
+	<div>
+			<a href="/admin/blog/create"><h4>New</h4></a>
+	</div>
 	{{ range .page.Blogs }}
 		<div class="row" align="left">
 			<a class="col-sm-7" href="/blog/read/{{ .Id }}">
@@ -9,7 +12,12 @@
 			<a href="/admin/blog/delete/{{ .Id }}" class="col-sm-1"><h4>Delete</h4></a>
 		</div>
 	{{ end }}
-	<div>
-		<a href="/admin/blog/create"><h4>Create</h4></a>
+	<div class="row" align="center">
+		<div class="col-sm-6">
+			<button class="btn btn-default"><a href="/page/read/{{ .page.PreIdx }}"><span class="glyphicon glyphicon-arrow-left"></span> Pre</a></button>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-default"><a href="/page/read/{{ .page.NextIdx }}">Next <span class="glyphicon glyphicon-arrow-right"></span></a></button>
+		</div>
 	</div>
 {{ template "footer.html" }}
