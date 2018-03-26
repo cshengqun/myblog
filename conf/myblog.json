@@ -10,7 +10,7 @@
 	"password": "justdoit",
 	"LogConf" :
 	{
-		"FileName" : "../log/myblog.log",
+		"FileName" : "/root/workshop/go/src/github.com/cshengqun/myblog/log/myblog.log",
 		"FileCnt" : 20,
 		"FileSize" : 100000000,
 		"Level" : 3,
@@ -18,5 +18,16 @@
 		"ThreadCnt" : 1,
 		"WriterLv" : 3
 	},
-	"PageSize" : 10
+	"MonConf" :
+	{
+		"FileName" : "/root/workshop/go/src/github.com/cshengqun/myblog/log/myBlogMonitor.log",
+		"FileCnt" : 20,
+		"FileSize" : 100000000,
+		"Level" : 3,
+		"ChanSize" : 1000,
+		"ThreadCnt" : 1,
+		"WriterLv" : 3
+	},
+	"PageSize" : 10,
+	"ProjectPath" : "/root/workshop/go/src/github.com/cshengqun/myblog/"
 }

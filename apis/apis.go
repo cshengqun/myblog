@@ -16,6 +16,7 @@ func Index(c *gin.Context) {
 	page.Idx = 0
 	page.PreIdx = page.Idx - 1
 	page.NextIdx = page.Idx + 1
+	Env.Report("myblog", "123", "456", "START_CALL", "{\"code\":\"1001\",\"value\":\"hello\"}", "{\"msg\":\"world\"}")
 	if err := page.Get(); err == nil {
 		c.HTML(http.StatusOK, "page.html", gin.H{
 			"page": page,

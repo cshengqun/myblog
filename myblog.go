@@ -6,11 +6,11 @@ import (
 )
 
 func initRouter() *gin.Engine {
-//	gin.DisableConsoleColor()
-//	gin.DefaultWriter = Env.Logger
+	gin.DisableConsoleColor()
+	gin.DefaultWriter = Env.Logger
 	router := gin.Default()
-	router.LoadHTMLGlob("../templates/*")
-	router.Static("/static/", "../static/")
+	router.LoadHTMLGlob(Env.Conf.ProjectPath + "templates/*")
+	router.Static("/static/", Env.Conf.ProjectPath + "static/")
 	router.GET("/", Index)
 	router.GET("/blog/read/:id", GetReadBlog)
 	router.GET("/page/read/:idx", ReadPage)

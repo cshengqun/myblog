@@ -2,7 +2,7 @@
 
 PROJECT=myblog
 rm -rf release/${PROJECT}
-mkdir -p release/${PROJECT}
+mkdir -p release/${PROJECT}/log
 cp -r bin release/${PROJECT}
 cp -r tools release/${PROJECT}
 cp -r conf release/${PROJECT}

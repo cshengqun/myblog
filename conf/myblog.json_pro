@@ -10,12 +10,14 @@
 	"password": "justdoit",
 	"LogConf" :
 	{
-		"FileName" : "../log/myblog.log",
+		"FileName" : "/home/ubuntu/app/myblog/log/myblog.log",
 		"FileCnt" : 20,
 		"FileSize" : 100000000,
 		"Level" : 3,
 		"ChanSize" : 1000,
 		"ThreadCnt" : 1,
 		"WriterLv" : 3
-	}
+	},
+	"PageSize" : 10,
+	"ProjectPath" : "/home/ubuntu/app/myblog/"
 }
