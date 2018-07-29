@@ -12,5 +12,10 @@ cp -r static release/${PROJECT}
 
 cp release/${PROJECT}/tools/restart.sh_pro release/${PROJECT}/tools/restart.sh
 cp release/${PROJECT}/conf/myblog.json_pro release/${PROJECT}/conf/myblog.json
-scp -r release/${PROJECT} ubuntu@111.231.232.47:/home/ubuntu/app/
+if [[ $1 = "first" ]]
+then
+	scp -r release/${PROJECT} ubuntu@111.231.232.47:/home/ubuntu/app/
+else
+    scp ./bin/myblog ubuntu@111.231.232.47:/home/ubuntu/app/myblog/bin
+fi
 

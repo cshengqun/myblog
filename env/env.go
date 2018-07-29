@@ -50,7 +50,7 @@ func (Env *TEnv) Report(moduleName string, bizSeqNo string, consumerSeqNo string
 var Env TEnv
 
 func init() {
-	file, err := os.Open("/root/workshop/go/src/github.com/cshengqun/myblog/conf/myblog.json")
+	file, err := os.Open("/home/ubuntu/app/myblog/conf/myblog.json")
 	defer file.Close()
 	decoder := json.NewDecoder(file)
 	err = decoder.Decode(&Env.Conf)

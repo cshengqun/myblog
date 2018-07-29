@@ -115,10 +115,13 @@ func PostUpdateBlog(c *gin.Context) {
 	if err := c.ShouldBind(&blog); err == nil {
 		Env.Logger.Info("id:%d name:%s content:%s", blog.Id, blog.Name, blog.Content)	
 		if err = blog.Update(); err == nil {
+			/*
 			c.JSON(http.StatusOK, gin.H{
 				"retCode": 0,
 				"retMsg": "update successfully",
 			})
+			*/
+			GetReadBlog(c);	
 		} else {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"retCode": -1,
@@ -144,7 +147,7 @@ func GetReadBlog(c *gin.Context) {
 		})
 	}
 	if rows, err := blog.Read(); err == nil && rows == 1 {
-		content := template.HTML(blackfriday.Run([]byte(blog.Content)))
+		content := template.HTML(blackfriday.Run([]byte(blog.Content), blackfriday.WithExtensions(blackfriday.HardLineBreak)))
 		c.HTML(http.StatusOK, "blog.html", gin.H{
 			"blog": blog,
 			"content": content,
